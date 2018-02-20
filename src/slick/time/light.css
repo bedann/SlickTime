@@ -1,0 +1,62 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : Apr 4, 2017, 11:41:21 PM
+    Author     : Monroe
+*/
+
+.root{
+    -fx-background-color: white;
+}
+
+.top{
+    -fx-background-color: teal;
+}
+
+.toggle-button{
+    -fx-background-radius: 70px;
+    -fx-background-color: transparent;
+    -fx-text-fill: #0b0b0b;
+}
+
+.toggle-button:selected,.toggle-button:selected:hover{
+    -fx-background-color: teal;
+    -fx-font-weight:bold;
+    -fx-text-fill: white;
+}
+
+.toggle-button:hover{
+    -fx-text-fill: #808080;
+    -fx-font-weight:bold;
+}
+
+.time-label{
+    -fx-font-weight:bold;
+    -fx-text-fill: white;
+    -fx-font-size:30px;
+}
+
+.set{
+    -fx-text-fill: black;
+    -fx-font-weight:bold;
+    -fx-background-color:transparent;
+}
+
+.refresh{
+    -fx-background-color: transparent;
+}
+
+.spinner .focus-indicator{
+    -fx-border-style: segments(0.166667em, 0.166667em);
+     -fx-border-width: 1;
+     -fx-border-color: transparent;
+     -fx-base:teal;
+}
+
+.container{
+    -fx-background-radius: 260px;
+    -fx-background-color: #eeeeee;
+}

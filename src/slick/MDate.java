@@ -1,0 +1,206 @@
+package slick;
+
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.ZoneId;
+import java.util.Calendar;
+import java.util.Date;
+
+/**
+ * Created by Monroe on 6/25/2016.
+ */
+public class MDate  {
+
+    private Date date = null;
+    SimpleDateFormat smartFormat = new SimpleDateFormat("EEE, d MMM");
+    SimpleDateFormat displayFormat = new SimpleDateFormat("d MMM yyyy");
+    SimpleDateFormat detailFormat = new SimpleDateFormat("dd MMM, h:mm a");
+    SimpleDateFormat normalFormat = new SimpleDateFormat("dd/MM/yyyy");
+    SimpleDateFormat format = new SimpleDateFormat("d/M/yyyy");//NEVER CHANGE THIS
+    SimpleDateFormat shortMonth = new SimpleDateFormat("MMM d");
+    SimpleDateFormat shortFormat = new SimpleDateFormat("EEE dd");
+    SimpleDateFormat monthFormat = new SimpleDateFormat("MMMM");
+    SimpleDateFormat dayFormat = new SimpleDateFormat("EEEE");
+    SimpleDateFormat timeFormat = new SimpleDateFormat("h:mm a");
+    SimpleDateFormat sqlDateTime = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+    SimpleDateFormat bigTimeFormat = new SimpleDateFormat("H:mm");
+    SimpleDateFormat saveFormat = new SimpleDateFormat("yyyy-MM-dd");
+    SimpleDateFormat reportFormat = new SimpleDateFormat("(MMMM d yyyy)");
+    Calendar cal = Calendar.getInstance(),today = Calendar.getInstance();
+
+    
+
+    public MDate(String ... dates) {
+        String dateText = dates.length == 0?System.currentTimeMillis()+"":dates[0];
+        try {
+            date = format.parse(dateText);
+        } catch (ParseException e) {
+        }
+        try {
+            if (date == null){
+                date = normalFormat.parse(dateText);
+            }
+        } catch (ParseException e) {
+
+        }
+        try {
+            if (date == null){
+                date = sqlDateTime.parse(dateText);
+            }
+        } catch (ParseException e) {
+
+        }
+        try {
+            if (date == null){
+                date = bigTimeFormat.parse(dateText);
+            }
+        } catch (ParseException e) {
+
+        }
+        try {
+            if (date == null){
+                date = saveFormat.parse(dateText);
+            }
+        } catch (ParseException e) {
+
+        }
+        try {
+            if (date == null){
+                date = smartFormat.parse(dateText);
+            }
+        } catch (ParseException e) {
+
+        }
+        try {
+            if (date == null){ date = format.parse(dateText);}
+        } catch (ParseException e) {
+
+        }
+        try {
+            if (date == null){ date = timeFormat.parse(dateText);}
+        } catch (ParseException e) {
+
+        }
+        try {
+            if (date == null){
+                date = new Date(Long.valueOf(dateText));
+            }
+        } catch (Exception e) {
+
+        }
+        cal.setTime(date);
+    }
+
+    public String getSqlDateTime(){
+        return sqlDateTime.format(date);
+    }
+    
+    public String getReportDate(){
+        return reportFormat.format(date);
+    }
+
+    public String getMonth(){
+        return monthFormat.format(date);
+    }
+
+
+    public String getSaveDate(){
+        return saveFormat.format(date);
+    }
+
+    public String getShort(){
+        return shortFormat.format(date);
+    }
+
+    public String getDay(){
+        return dayFormat.format(date);
+    }
+
+    public String getFormat(){
+        return format.format(date);
+    }
+
+    public String getShortMonth(){
+        return shortMonth.format(date);
+    }
+
+    public String smartDate(){
+        return smartFormat.format(date);
+    }
+
+    public String displayDate(){
+        return displayFormat.format(date);
+    }
+
+    public String detailDate(){
+        return detailFormat.format(date);
+    }
+    public String getTime(){
+        return timeFormat.format(date);
+    }
+
+    public long getTimeValue(){
+        return date.getTime();
+    }
+
+    public int getDayOfYear(){
+        return cal.get(Calendar.DAY_OF_YEAR);
+    }
+
+    public int getHour(){
+        return cal.get(Calendar.HOUR);
+    }
+
+    public String getRelativeTime(){
+        int then = cal.get(Calendar.DAY_OF_YEAR),now = today.get(Calendar.DAY_OF_YEAR);
+        if (then == now){
+            return getTime();
+        }
+        if (then < now){
+            if ((now-then)==1){
+                return getTime();
+            }
+            if ((now-then)<7){
+                return getShort();
+            }
+        }
+        return getShortMonth();
+    }
+
+    public int getHourOfDay(){
+        return cal.get(Calendar.HOUR_OF_DAY);
+    }
+
+
+    public int getMinutes(){
+        return cal.get(Calendar.MINUTE);
+    }
+
+    public Date getDate() {
+        return date;
+    }
+
+    public MDate setDate(Date date) {
+        this.date = date;
+        return this;
+    }
+    
+    public LocalDate toLocalDate(){
+        return date.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+    }
+    
+    public LocalDateTime toLocalDateTime(){
+        return date.toInstant().atZone(ZoneId.systemDefault()).toLocalDateTime();
+    }
+    
+    public static MDate fromLocalDate(LocalDate date){
+        return new MDate().setDate(java.sql.Date.valueOf(date));
+    }
+    
+    public static MDate fromLocalDateTime(LocalDateTime date){
+        return new MDate().setDate(java.sql.Date.valueOf(date.toLocalDate()));
+    }
+
+}

@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<jnlp spec="1.0" xmlns:jfx="http://javafx.com" href="Slick.jnlp">
+  <information>
+    <title>Slick</title>
+    <vendor>Monroe</vendor>
+    <description>null</description>
+    <offline-allowed/>
+  </information>
+  <resources>
+    <j2se version="1.6+" href="http://java.sun.com/products/autodl/j2se"/>
+    <jar href="Slick.jar" size="61891" download="eager" />
+    <jar href="lib\jfoenix.jar" size="2159593" download="eager" />
+    <jar href="lib\jfxtras-labs-samples-8.0-r5-SNAPSHOT-shadow.jar" size="2910793" download="eager" />
+    <jar href="lib\kotlin-runtime.jar" size="878511" download="eager" />
+  </resources>
+  <applet-desc  width="800" height="600" main-class="com.javafx.main.NoJavaFXFallback"  name="Slick" >
+    <param name="requiredFXVersion" value="8.0+"/>
+  </applet-desc>
+  <jfx:javafx-desc  width="800" height="600" main-class="slick.Slick"  name="Slick" />
+  <update check="always"/>
+</jnlp>
